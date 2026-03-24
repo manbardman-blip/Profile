@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>By - Portifolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --border-color: #30363d;
+            --accent-color: #58a6ff;
+            --success-color: #3fb950;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 48px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-tab {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95em;
+            padding: 8px 0;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-tab:hover,
+        .nav-tab.active {
+            color: var(--text-primary);
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 296px 1fr;
+            gap: 24px;
+            padding: 24px 48px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .profile-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .profile-avatar {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.3);
+        }
+
+        .profile-name {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .profile-bio {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .follow-button {
+            width: 100%;
+            padding: 8px 16px;
+            background: var(--accent-color);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 16px;
+        }
+
+        .follow-button:hover {
+            background: #79c0ff;
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9em;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+        }
+
+        .stat-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .social-link {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.1em;
+        }
+
+        .social-link:hover {
+            background: var(--accent-color);
+            color: var(--bg-primary);
+            border-color: var(--accent-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Repository Card */
+        .repo-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+
+        .repo-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+        }
+
+        .repo-header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: start;
+            margin-bottom: 20px;
+        }
+
+        .repo-image {
+            width: 100%;
+            height: 250px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+        }
+
+        .repo-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .repo-title-icon {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        .repo-description {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .repo-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .meta-badge {
+            background: var(--bg-tertiary);
+            padding: 4px 8px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Section */
+        .section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* GitHub Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .stat-name {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 12px;
+        }
+
+        .tech-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tech-icon:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+        }
+
+        /* Repository Grid */
+        .repos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .repo-mini-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s;
+        }
+
+        .repo-mini-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+        }
+
+        .repo-mini-title {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .repo-mini-desc {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .repo-mini-lang {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .lang-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        /* Circle Progress */
+        .circle-progress {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--accent-color) 0deg,
+                var(--accent-color) 108deg,
+                var(--border-color) 108deg
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .circle-progress::after {
+            content: '';
+            position: absolute;
+            width: 85px;
+            height: 85px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+        }
+
+        .circle-text {
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            font-size: 1.3em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 16px;
+            }
+
+            .navbar {
+                padding: 12px 16px;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .nav-tabs {
+                gap: 16px;
+            }
+
+            .repo-header {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            }
+
+            .repos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* About Section */
+        .about-text {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .about-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-icon {
+            width: 150px;
+            height: 150px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-tabs">
+            <a href="#overview" class="nav-tab active">
+                <i class="fas fa-chart-line"></i> Overview
+            </a>
+            <a href="#repositories" class="nav-tab">
+                <i class="fas fa-code-branch"></i> Repositories
+            </a>
+            <a href="#projects" class="nav-tab">
+                <i class="fas fa-project-diagram"></i> Projects
+            </a>
+            <a href="#packages" class="nav-tab">
+                <i class="fas fa-box"></i> Packages
+            </a>
+            <a href="#stars" class="nav-tab">
+                <i class="fas fa-star"></i> Stars
+            </a>
+        </div>
+    </nav>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <img src="https://i.pinimg.com/736x/2e/95/b1/2e95b1cfd7284c78142bfedde0c78458.jpg" alt="Profile" class="profile-avatar">
+                <div class="profile-name">Ryan</div>
+                <p class="profile-bio">Curso administrativo | React | HTML/PYTHON | Almoxarifado | Atendimento ao publico</p>
+                <button class="follow-button"><i class="fas fa-heart"></i> Follow</button>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label"><i class="fas fa-users"></i> Followers</span>
+                        <span class="stat-value">125</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label"><i class="fas fa-user-check"></i> Following</span>
+                        <span class="stat-value">42</span>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="iokayorig@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+          
+                    <a href="https://www.linkedin.com/in/ryan-carlos-352ba13b9/edit/forms/summary/new/?profileFormEntryPoint=GUIDANCE_CARD" class="social-link" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Featured Repository -->
+            <div class="repo-card">
+                <div class="repo-header">
+                    <div>
+                        <div class="repo-title">
+                            <i class="fas fa-code-branch repo-title-icon"></i>
+                            Portfolio Website
+                        </div>
+                        <p class="repo-description">
+                            Um portfólio responsivo moderno desenvolvido com React, TypeScript e  CSS. 
+                            Apresentando interesse profissional, habilidades comunicativas, escritas e observações.
+                        </p>
+                        <div class="repo-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-eye"></i>
+                                <span class="meta-badge">Profile Views: 1,341</span>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-star"></i>
+                                <span class="meta-badge">14</span>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-code-branch"></i>
+                                <span class="meta-badge">7</span>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-circle-user"></i>
+                                <span class="meta-badge">8 Followers</span>
+                            </span>
+                        </div>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=300&h=200&fit=crop&q=80" alt="Repository" class="repo-image">
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-user"></i> Um Pouco Mais Sobre Mim
+                </div>
+                <div class="about-text">
+                    <div class="about-content">
+                        <p style="margin-bottom: 15px;">
+                            <strong>👨‍💻 Aprendiz na vida adulta</strong>
+                        </p>
+                        <ul style="margin-left: 20px; color: var(--text-secondary);">
+                            <li>Apaixonado por comunicação e aprendizado</li>
+                            <li>Sempre buscando aprender tecnologias novas</li>
+                            <li>Comprometido com a qualidade e responsabilidade</li>
+                            <li>Amante da literatura e autocritica</li>
+                        </ul>
+                    </div>
+                    <div class="about-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Stats -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-chart-bar"></i> GitHub Status
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number">298</div>
+                        <div class="stat-name">Total de Contribuições</div>
+                        <p style="font-size: 0.75em; color: var(--text-secondary); margin-top: 8px;">9 de jan de 2024 - Presente</p>
+                    </div>
+                    <div class="stat-box">
+                        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                            <div class="circle-progress">
+                                <span class="circle-text">3</span>
+                            </div>
+                        </div>
+                        <div class="stat-name" style="margin-top: 12px;">Sequência Semanal<br><small style="color: #8b949e;">22 de jan - 4 de fev</small></div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">14</div>
+                        <div class="stat-name">Maior Sequência</div>
+                        <p style="font-size: 0.75em; color: var(--text-secondary); margin-top: 8px;">20 de dez de 2024 - 30 de ago</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="fas fa-layer-group"></i> Minhas Stacks
+                </div>
+                <div class="tech-grid">
+                    <div class="tech-icon" title="HTML5"><i class="fab fa-html5"></i></div>
+                    <div class="tech-icon" title="CSS3"><i class="fab fa-css3-alt"></i></div>
+                    
+                    
+                    <div class="tech-icon" title="React"><i class="fab fa-react"></i></div>
+                
+                    <div class="tech-icon" title="Python"><i class="fab fa-python"></i></div>
+                    <div class="tech-icon" title="Git"><i class="fab fa-git-alt"></i></div>
+                    <div class="tech-icon" title="GitHub"><i class="fab fa-github"></i></div>
+                    <div class="tech-icon" title="Docker"><i class="fab fa-docker"></i></div>
+                    
+                   
+                    <div class="tech-icon" title="Linux"><i class="fab fa-linux"></i></div>
+                    <div class="tech-icon" title="VS Code"><i class="fas fa-code"></i></div>
+                    
+                </div>
+            </div>
+
+            
+    </script>
+</body>
+</html>
