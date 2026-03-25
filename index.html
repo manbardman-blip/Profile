@@ -285,7 +285,203 @@
             gap: 8px;
         }
 
-        
+        /* GitHub Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+
+        .stat-name {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+        }
+
+        /* Tech Stack */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 12px;
+        }
+
+        .tech-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tech-icon:hover {
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+        }
+
+        /* Repository Grid */
+        .repos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .repo-mini-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s;
+        }
+
+        .repo-mini-card:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-4px);
+        }
+
+        .repo-mini-title {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .repo-mini-desc {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .repo-mini-lang {
+            font-size: 0.8em;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .lang-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        /* Circle Progress */
+        .circle-progress {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--accent-color) 0deg,
+                var(--accent-color) 108deg,
+                var(--border-color) 108deg
+            );
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .circle-progress::after {
+            content: '';
+            position: absolute;
+            width: 85px;
+            height: 85px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+        }
+
+        .circle-text {
+            position: relative;
+            z-index: 1;
+            font-weight: 700;
+            font-size: 1.3em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 16px;
+            }
+
+            .navbar {
+                padding: 12px 16px;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .nav-tabs {
+                gap: 16px;
+            }
+
+            .repo-header {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .tech-grid {
+                grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            }
+
+            .repos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* About Section */
+        .about-text {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .about-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-icon {
+            width: 150px;
+            height: 150px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            border: 1px solid var(--border-color);
+        }
+    </style>
+</head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -399,32 +595,7 @@
                 </div>
             </div>
 
-            <!-- GitHub Stats -->
-            <div class="section">
-                <div class="section-title">
-                    <i class="fas fa-chart-bar"></i> GitHub Status
-                </div>
-                <div class="stats-grid">
-                    <div class="stat-box">
-                        <div class="stat-number">298</div>
-                        <div class="stat-name">Total de Contribuições</div>
-                        <p style="font-size: 0.75em; color: var(--text-secondary); margin-top: 8px;">9 de jan de 2024 - Presente</p>
-                    </div>
-                    <div class="stat-box">
-                        <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
-                            <div class="circle-progress">
-                                <span class="circle-text">3</span>
-                            </div>
-                        </div>
-                        <div class="stat-name" style="margin-top: 12px;">Sequência Semanal<br><small style="color: #8b949e;">22 de jan - 4 de fev</small></div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number">14</div>
-                        <div class="stat-name">Maior Sequência</div>
-                        <p style="font-size: 0.75em; color: var(--text-secondary); margin-top: 8px;">20 de dez de 2024 - 30 de ago</p>
-                    </div>
-                </div>
-            </div>
+         
 
             <!-- Tech Stack -->
             <div class="section">
